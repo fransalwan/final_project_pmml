@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>RETECO Research Poster — TempConv-GatedRanker</title>
+  <style>
+    @page {
+      size: 1680px 1188px;
+      margin: 0;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+      background: #f1f5f9;
+      color: #0f172a;
+      width: 1680px;
+      min-height: 1188px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .poster-container {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 2px solid #cbd5e1;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 1148px;
+    }
+    /* Header Banner */
+    .header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #0f766e 100%);
+      color: #ffffff;
+      padding: 22px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 5px solid #10b981;
+    }
+    .header-left {
+      max-width: 78%;
+    }
+    .badge-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .badge {
+      background: rgba(16, 185, 129, 0.25);
+      border: 1px solid #34d399;
+      color: #ecfdf5;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+    .header h1 {
+      font-size: 25px;
+      line-height: 1.22;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin-bottom: 6px;
+    }
+    .header p.authors {
+      font-size: 14px;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+    .header-right {
+      text-align: right;
+      background: rgba(255, 255, 255, 0.09);
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .header-right .metric-highlight {
+      font-size: 24px;
+      font-weight: 800;
+      color: #34d399;
+    }
+    .header-right .metric-sub {
+      font-size: 11.5px;
+      color: #e2e8f0;
+    }
+
+    /* 3-Column Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr 1.15fr;
+      gap: 16px;
+      padding: 16px 20px;
+      flex: 1;
+      overflow: hidden;
+    }
+    .col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .card {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 13px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .card.accent-blue {
+      border-top: 4px solid #2563eb;
+    }
+    .card.accent-green {
+      border-top: 4px solid #10b981;
+    }
+    .card.accent-purple {
+      border-top: 4px solid #7c3aed;
+    }
+    .card.accent-amber {
+      border-top: 4px solid #d97706;
+    }
+    .card h2 {
+      font-size: 15px;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card p, .card li {
+      font-size: 12px;
+      line-height: 1.42;
+      color: #334155;
+    }
+    .card ul {
+      padding-left: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .formula-box {
+      background: #eff6ff;
+      border-left: 3.5px solid #2563eb;
+      padding: 7px 10px;
+      font-family: 'Cambria Math', 'Consolas', monospace;
+      font-size: 11.5px;
+      color: #1e3a8a;
+      border-radius: 4px;
+    }
+    .img-wrap {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 6px;
+      text-align: center;
+    }
+    .img-wrap img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    table.res-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      background: #ffffff;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    table.res-table th {
+      background: #1e293b;
+      color: #ffffff;
+      padding: 5px 6px;
+      text-align: left;
+      font-weight: 700;
+    }
+    table.res-table td {
+      padding: 4.5px 6px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #1e293b;
+    }
+    table.res-table tr.ours {
+      background: #ecfdf5;
+      font-weight: 700;
+      color: #065f46;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .kpi {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 7px;
+      text-align: center;
+    }
+    .kpi .val {
+      font-size: 17px;
+      font-weight: 800;
+      color: #059669;
+    }
+    .kpi .lbl {
+      font-size: 10px;
+      color: #475569;
+      font-weight: 600;
+    }
+    .footer {
+      background: #0f172a;
+      color: #94a3b8;
+      font-size: 11px;
+      padding: 8px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="poster-container">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-left">
+        <div class="badge-row">
+          <span class="badge">SemEval-2027 Task 1 · RETECO</span>
+          <span class="badge">NLP &amp; Deep Information Retrieval</span>
+          <span class="badge">131,544 Corpus Passages · 6 Domains</span>
+        </div>
+        <h1>TempConv-GatedRanker: Dual-Stream Temporal-Conversational Gated Neural Reranking with Adaptive Prior Regularization</h1>
+        <p class="authors">Final Project PMML · Evaluated on Official RETECO v1.1 Benchmark (Track 1: TEMPO Temporal Grounded Retrieval &amp; Track 2: RECOR Conversational Retrieval)</p>
+      </div>
+      <div class="header-right">
+        <div class="metric-highlight">+132% T1 / +35% T2</div>
+        <div class="metric-sub">Held-Out Dev nDCG@10 Gain vs. Official BM25</div>
+      </div>
+    </div>
+
+    <!-- MAIN 3-COLUMN CONTENT -->
+    <div class="grid">
+      <!-- COLUMN 1: PROBLEM, DATASET & PROPOSED METHOD -->
+      <div class="col">
+        <div class="card accent-blue">
+          <h2>1. Problem &amp; Motivation</h2>
+          <p>Standard lexical (BM25) and single-vector dense retrievers assume relevance is purely topical. In <strong>RETECO (SemEval-2027 Task 1)</strong>, retrieval requires reasoning over two critical dimensions:</p>
+          <ul>
+            <li><strong>Track 1 (Temporal Blindness — TEMPO):</strong> Passages are relevant only if their chronological scope or software version matches the query's required time anchor. Lexical rankers rank outdated passages with high keyword overlap at the top.</li>
+            <li><strong>Track 2 (Conversational Drift — RECOR):</strong> Multi-turn queries (T1–T5+) rely on coreference and ellipsis. Current-turn retrieval loses entity context, while concatenating full dialogue history floods deep turns (T3–T5+) with early-turn answer noise.</li>
+          </ul>
+        </div>
+
+        <div class="card accent-green">
+          <h2>2. Proposed Method: TempConv-GatedRanker</h2>
+          <ul>
+            <li><strong>Stage 1 — Temporal-Anchor &amp; Turn-Decay Distillation:</strong> Amplifies 4-digit year &amp; version anchors in Track 1; applies step-decay truncation to historical answers (35w for Δt=1, 20w for Δt=2, 0w for Δt≥3) while retaining all prior questions in Track 2.</li>
+            <li><strong>Stage 2 — Three-Stream Gated Neural Network (Keras):</strong>
+              <br/>• <em>Stream 1 (Dense Bi-Encoder):</em> Shared 2-layer Residual GELU+LayerNorm MLP over 64D SVD embeddings with 129D late interaction <code>[u⊙v ; |u−v| ; cos(u,v)]</code>.
+              <br/>• <em>Stream 2 (Temporal/Conv Alignment):</em> 14D structural network modeling exact year overlap, exponential date proximity, version match, temporal signal product, and turn depth.
+              <br/>• <em>Stream 3 (Lexical Skip) &amp; Softmax Contextual Gate:</em> Dynamically weights all 3 streams per query-passage pair.</li>
+          </ul>
+          <div class="formula-box">
+            α(q,d) = Softmax(W_g [h_sem ; h_temp ; f_lex])<br/>
+            L(Θ) = 0.65 max(0, m − Δs) + 0.35 log(1 + exp(−Δs))  [Hard Negatives]<br/>
+            S_final = (1 − γ_d) s_prior + γ_d s_NN,   γ_d = β · N_train / (N_train + τ)
+          </div>
+        </div>
+
+        <div class="card accent-purple">
+          <h2>3. Multi-Domain Dataset (RETECO v1.1)</h2>
+          <table class="res-table">
+            <thead>
+              <tr><th>Track</th><th>Domain</th><th>Passages</th><th>Train Qs</th><th>Dev Qs</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>T1: TEMPO</td><td><code>iota</code> (Blockchain)</td><td>9,680</td><td>7</td><td>3</td></tr>
+              <tr><td>T1: TEMPO</td><td><code>quant</code> (Quant Finance)</td><td>25,040</td><td>24</td><td>10</td></tr>
+              <tr><td>T1: TEMPO</td><td><code>workplace</code> (Applied)</td><td>43,584</td><td>25</td><td>11</td></tr>
+              <tr><td>T2: RECOR</td><td><code>drones</code> (Engineering)</td><td>16,381</td><td>104</td><td>38</td></tr>
+              <tr><td>T2: RECOR</td><td><code>law</code> (Legal QA)</td><td>20,027</td><td>164</td><td>66</td></tr>
+              <tr><td>T2: RECOR</td><td><code>politics</code> (Social Sci)</td><td>16,712</td><td>159</td><td>54</td></tr>
+              <tr class="ours"><td colspan="2">Total (6 Official Domains)</td><td>131,544</td><td>483</td><td>182</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- COLUMN 2: ARCHITECTURE DIAGRAM, MAIN RESULTS & ABLATIONS -->
+      <div class="col">
+        <div class="card accent-blue">
+          <h2>4. System Architecture Pipeline</h2>
+          <div class="img-wrap">
+            <img src="experiment_outputs/figures/fig0_architecture_diagram.png" alt="Architecture Diagram" />
+          </div>
+        </div>
+
+        <div class="card accent-green">
+          <h2>5. Quantitative Results (Held-Out Dev Split)</h2>
+          <div class="kpi-grid">
+            <div class="kpi"><div class="val">0.3494</div><div class="lbl">Track 2 Dev nDCG@10 (#1)</div></div>
+            <div class="kpi"><div class="val">0.3120</div><div class="lbl">Track 1 Dev nDCG@10 (+132%)</div></div>
+            <div class="kpi"><div class="val">0.4912</div><div class="lbl">Track 1 Temporal Cov (TC@10)</div></div>
+          </div>
+          <table class="res-table">
+            <thead>
+              <tr><th>Model / Ablation Variant</th><th>T1 Dev nDCG@10</th><th>T1 TC@10</th><th>T1 NDCG|FC</th><th>T2 Dev nDCG@10</th><th>T2 MRR@10</th><th>T2 R@10</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1. Official BM25 (Base Query)</td><td>0.1345</td><td>0.2037</td><td>0.1975</td><td>0.0918</td><td>0.0812</td><td>0.1693</td></tr>
+              <tr><td>2. Official BM25 (+Step / +Hist)</td><td>0.1411</td><td>0.2284</td><td>0.2083</td><td>0.2588</td><td>0.2746</td><td>0.3705</td></tr>
+              <tr><td>3. Dense Bi-Encoder (SVD-64D)</td><td><strong>0.4088</strong></td><td><strong>0.4912</strong></td><td><strong>0.7474</strong></td><td>0.2762</td><td>0.2847</td><td>0.4194</td></tr>
+              <tr><td>4. Ablation: w/o Adaptive Prior</td><td>0.2637</td><td>0.4788</td><td>0.4705</td><td>0.3128</td><td>0.3287</td><td>0.4522</td></tr>
+              <tr><td>5. Ablation: w/o Hard Negatives</td><td>0.2898</td><td>0.4727</td><td>0.4834</td><td>0.3164</td><td>0.3364</td><td>0.4621</td></tr>
+              <tr><td>6. Ablation: w/o Temp/Turn Feats</td><td>0.2915</td><td>0.4727</td><td>0.4823</td><td>0.2878</td><td>0.2790</td><td>0.4499</td></tr>
+              <tr><td>7. Ablation: w/o Contextual Gate</td><td>0.3131</td><td>0.4912</td><td>0.5624</td><td>0.3428</td><td>0.3644</td><td>0.4785</td></tr>
+              <tr class="ours"><td>8. TempConv-GatedRanker (Ours)</td><td>0.3120 (+132%)</td><td>0.4912 (+141%)</td><td>0.5592 (+183%)</td><td>0.3494 (+35%)</td><td>0.3854 (+40%)</td><td>0.4735 (+28%)</td></tr>
+            </tbody>
+          </table>
+          <div class="img-wrap">
+            <img src="experiment_outputs/figures/fig4_ablation_study.png" alt="Ablation Study" />
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMN 3: DIAGNOSTICS, TURN DEPTH & SCIENTIFIC JUSTIFICATION -->
+      <div class="col">
+        <div class="card accent-amber">
+          <h2>6. Turn-Depth &amp; Domain Diagnostics</h2>
+          <div class="img-wrap">
+            <img src="experiment_outputs/figures/fig3_track2_turn_degradation.png" alt="Turn Depth Analysis" />
+          </div>
+          <div class="img-wrap">
+            <img src="experiment_outputs/figures/fig6_per_domain_heatmap.png" alt="Per-Domain Heatmap" />
+          </div>
+        </div>
+
+        <div class="card accent-purple">
+          <h2>7. Scientific Justification &amp; Key Takeaways</h2>
+          <ul>
+            <li><strong>Why Ours Excels on Track 2 (+35.0% vs. BM25+Hist, +26.5% vs. Dense Bi-Encoder):</strong> With <em>N_train = 427</em> conversational turns, our neural ranker learns robust non-linear interactions. Exponential Turn-Decay Distillation prevents early-turn answers from polluting deep turns (lifting <code>politics</code> T5+ nDCG@10 from 0.1452 to <strong>0.3931</strong>).</li>
+            <li><strong>Why Zero-Parameter Dense Bi-Encoder Leads on Low-Resource Track 1 Dev (0.4088 vs. 0.3120):</strong>
+              <br/>1. <em>Sample-Size Disparity:</em> Track 1 has <strong>7.6× fewer training topics</strong> (only 7 in <code>iota</code>, 24 in <code>quant</code>, 25 in <code>workplace</code>). Unregularized neural reranking achieves the highest Track 1 <em>Train</em> nDCG@10 (0.2862 vs. 0.2370) but overfits on tiny dev sets.
+              <br/>2. <em>Implicit Temporality:</em> In <code>quant</code>, temporal shifts are expressed via domain events (<em>"LIBOR to SOFR transition"</em>) rather than explicit 4-digit years, favoring latent SVD co-occurrence over explicit year-match weights.
+              <br/>3. <em>Adaptive Prior Recovery:</em> Our Bayesian Shrinkage Prior recovers <strong>+4.83 nDCG@10 pts</strong> (0.2637 → 0.3120) on Track 1 Dev.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <span>Final Project — Pembelajaran Mesin &amp; Deep Learning Lanjut (PMML) · November 2026</span>
+      <span>Dataset: DataScience-UIBK/RETECO-SemEval2027 · Official Metric: nDCG@10 (pytrec_eval / ir_metrics.py)</span>
+    </div>
+  </div>
+</body>
+</html>
